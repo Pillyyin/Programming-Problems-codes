@@ -4,7 +4,7 @@ int main() {
     string text ; 
     int M = 0, score = 0, diff = 0, count = 0 ;
     int allsize[100] ;
-    while(getline(cin, text)){  //Åª¾ã¦æ
+    while(getline(cin, text)){  //è®€æ•´è¡Œ
         
         int textsize = text.size() ;
         
@@ -15,7 +15,7 @@ int main() {
         count++ ;
     }
 
-    for(int i=0;i<count-1;i++){ //³Ì«á¤@¦æ¤£¥Îºâ
+    for(int i=0;i<count-1;i++){ //æœ€å¾Œä¸€è¡Œä¸ç”¨ç®—
         diff = pow((M - allsize[i]),2)  ;
         score += diff ;
     }

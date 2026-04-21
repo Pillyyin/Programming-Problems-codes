@@ -20,7 +20,7 @@ int main() {
         st.pop() ;
     }
 
-    reverse(ans.begin() , ans.end()) ; //¤ÏÂà
+    reverse(ans.begin() , ans.end()) ; //åè½‰
 
     for(int i=0;i<ans.size();i++){
         cout << ans[i] ;

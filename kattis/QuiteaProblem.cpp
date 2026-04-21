@@ -2,14 +2,14 @@
 using namespace std;
 int main() {
     string line, target ;
-    target = "problem" ; //¥Î¤p¼g§PÂ_
+    target = "problem" ; //ç”¨å°å¯«åˆ¤æ–·
     
     while(getline(cin,line)){
 
         int sizeline = line.size() ;
         int sizetarget = target.size() ;
         bool found = false;
-        for(int i=0;i<sizeline;i++){ //¥şÂà¤p¼g
+        for(int i=0;i<sizeline;i++){ //å…¨è½‰å°å¯«
             line[i] = tolower(line[i]); 
         }
 

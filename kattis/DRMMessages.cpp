@@ -25,11 +25,11 @@ int main() {
        msg[i] = (char)('A' + (msg[i] - 'A' + rotatevalue) % 26);
     }
 
-    //²¾°Ê­È
+    //ç§»å‹•å€¼
     int movevalue = 0 ;
     string newmsg = "";
     for(int i = 0; i < half; i++){
-        movevalue = msg[half + i] - 'A';           // back[i] ªº­È
+        movevalue = msg[half + i] - 'A';           // back[i] çš„å€¼
         newmsg += (char)('A' + (msg[i] - 'A' + movevalue) % 26);  // front[i] + movevalue
     }
     cout << newmsg << "\n";

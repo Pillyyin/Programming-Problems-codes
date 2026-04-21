@@ -13,9 +13,9 @@ int main() {
         for(int i = 0; i < n; i++){
             cin >> tmp;
             if(i % 2 == 0){
-                top[ti++] = tmp;    // ∞∏º∆
+                top[ti++] = tmp;    // ÂÅ∂Êï∏
             } else {
-                bottom[bi++] = tmp; // ©_º∆
+                bottom[bi++] = tmp; // Â•áÊï∏
             }
         }
 

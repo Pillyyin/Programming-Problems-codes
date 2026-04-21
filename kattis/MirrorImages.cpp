@@ -14,13 +14,13 @@ int main() {
             }
         }
 
-        //½��⦸
+        //翻轉兩次
         for(int k = 0; k < grid.size(); k++){
             reverse(grid[k].begin(), grid[k].end());
         }
         reverse(grid.begin(), grid.end());
 
-        //��X
+        //輸出
         cout << "Test " << i+1  << "\n" ;
         for(int l=0;l<length;l++){
             for(int m=0;m<width;m++){

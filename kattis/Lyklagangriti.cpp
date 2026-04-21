@@ -6,18 +6,18 @@ int main(){
     cin >> s ;
 
     list<char> password ;
-    auto mouse = password.begin() ; // ´å¼Ğ
+    auto mouse = password.begin() ; // æ¸¸æ¨™
 
     for(char c : s){
-        if(c == 'L'){   //¥ª²¾
+        if(c == 'L'){   //å·¦ç§»
             if(mouse != password.begin()) mouse-- ; 
         }
-        else if(c == 'R'){  //¥k²¾
+        else if(c == 'R'){  //å³ç§»
             if(mouse != password.end()) mouse++ ;
         }
         else if(c == 'B'){
             if(mouse != password.begin()){
-                mouse = password.erase(--mouse) ; //§R±¼¹«¼Ğ¥ªÃä
+                mouse = password.erase(--mouse) ; //åˆªæ‰é¼ æ¨™å·¦é‚Š
             }
         }
         else{

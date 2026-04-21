@@ -9,7 +9,7 @@ int main() {
     }
     
     vector<int> gis ;
-    gis.push_back(g[0]) ; //²Ä¤@¶µ¤@©w¿é¥X
+    gis.push_back(g[0]) ; // ç¬¬ä¸€é …ä¸€å®šè¦è¼¸å‡º
     for(int j=0;j<N;j++){
         if(g[j]>gis.back()){
             gis.push_back(g[j]) ; 

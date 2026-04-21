@@ -11,11 +11,11 @@ int main() {
         }
     }
 
-    //©ñ¤j
+    //æ”¾å¤§
     for(int i=0;i<R;i++){   
-        for(int zr=0;zr<Zr;zr++){   //¦æ­«½Æ
+        for(int zr=0;zr<Zr;zr++){   //è¡Œé‡è¤‡
             for(int j=0;j<C;j++){
-                for(int zc=0;zc<Zc;zc++){   //¦C­«½Æ
+                for(int zc=0;zc<Zc;zc++){   //åˆ—é‡è¤‡
                     cout << matrix[i][j] ;
                 }
             }

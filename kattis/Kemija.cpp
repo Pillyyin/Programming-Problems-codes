@@ -5,10 +5,10 @@ int main() {
     getline(cin , fool) ;
     int sizefool = fool.size() ;
     for(int i=0;i<sizefool;i++){ 
-        real += fool[i] ; //¦s¤Jreal
-        //§PÂ_¥À­µ
+        real += fool[i] ; //å­˜å…¥real
+        //åˆ¤æ–·æ¯éŸ³
         if(fool[i] == 'a' || fool[i] == 'e' || fool[i] == 'i' || fool[i] == 'o' || fool[i] == 'u'){
-            i += 2 ; //¸õ¹L¶Ã¥[ªºp©M¥À­µ
+            i += 2 ; //è·³éŽäº‚åŠ çš„på’Œæ¯éŸ³
         }
     }
     

@@ -10,11 +10,11 @@ int main() {
 
         bool diff[A.size()]  ;
 
-        for(int j=0;j<A.size();j++){    //¥þ³¡³]¬°true
+        for(int j=0;j<A.size();j++){    //å…¨éƒ¨è¨­ç‚ºtrue
             diff[j] = true ;
         }
 
-        for(int j=0;j<A.size();j++){    //¤£¦P¼Ð°Ofalse
+        for(int j=0;j<A.size();j++){    //ä¸åŒæ¨™è¨˜false
             if(A[j] != B[j]){
                 diff[j] = false ;
             }

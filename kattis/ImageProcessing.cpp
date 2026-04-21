@@ -21,10 +21,10 @@ int main() {
     //claude
     for(int i = 0; i < H-N+1; i++){
         for(int j = 0; j < W-M+1; j++){
-            convoluted[i][j] = 0;  // ¥ýÂk¹s
+            convoluted[i][j] = 0;  // å…ˆæ­¸é›¶
             for(int k = 0; k < N; k++){
                 for(int l = 0; l < M; l++){
-                    // kernel Â½Âà¡G¥Î N-1-k ©M M-1-l
+                    // kernel ç¿»è½‰ï¼šç”¨ N-1-k å’Œ M-1-l
                     convoluted[i][j] += image[i+k][j+l] * kernel[N-1-k][M-1-l];
                 }
             }

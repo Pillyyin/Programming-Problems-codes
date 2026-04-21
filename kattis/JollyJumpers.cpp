@@ -5,23 +5,23 @@ int main() {
     int n;
     while(cin >> n){
         int num[n];
-        bool seen[n]; //§PÂ_array
+        bool seen[n]; //åˆ¤æ–·array
         for(int i = 0; i < n; i++){
             cin >> num[i];
-            seen[i] = false; //¥ıRESET
+            seen[i] = false; //å…ˆRESET
         }
 
         bool jolly = true;
         for(int i = 0; i < n-1; i++){
-            int diff = abs(num[i+1] - num[i]);  // ­pºâ®t­È
-            if(diff < 1 || diff > n-1){          // ®t­È¶W¥X½d³ò
+            int diff = abs(num[i+1] - num[i]);  // è¨ˆç®—å·®å€¼
+            if(diff < 1 || diff > n-1){          // å·®å€¼è¶…å‡ºç¯„åœ
                 jolly = false;
             }else{
-                seen[diff] = true;               // ¼Ğ°O¦¹®t­È¥X²{¹L
+                seen[diff] = true;               // æ¨™è¨˜æ­¤å·®å€¼å‡ºç¾é
             }
         }
 
-        for(int i = 1; i <= n-1; i++){           // ÀË¬d1~n-1¥ş³¡¥X²{
+        for(int i = 1; i <= n-1; i++){           // æª¢æŸ¥1~n-1å…¨éƒ¨å‡ºç¾
             if(!seen[i]){
                 jolly = false;
                 break;
