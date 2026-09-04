@@ -4,5 +4,9 @@
         "random": "cpp",
         "iomanip": "cpp"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.encoding":"utf8",
+    "[cpp]": {
+        "files.encoding": "utf8"
+  }
 }

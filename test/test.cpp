@@ -1,10 +1,8 @@
-# include <bits/stdc++.h>
+#include <iostream>
+
 using namespace std;
 
 int main() {
-    int k ;
-    cin >> k ;
-    int n = (32 >> k);
-    cout << n ;
-    return 0 ;
+    string s1 = "ABCCCD", s2= "EEE" ;
+    cout <<  s1.find(s2) <<"\n" ;
 }

@@ -1,4 +1,4 @@
-//ASCII 轉換
+//ASCII 嚙賞換
 #include <bits/stdc++.h>
 using namespace std;
 int main() {
@@ -7,7 +7,7 @@ int main() {
     cin >> T >> word;
     string ans = "";
 
-    for(int i = 0; i < word.size(); i++){  // ? 用 word.size() 不是 T
+    for(int i = 0; i < word.size(); i++){  // 
         if(word[i] >= 'A' && word[i] <= 'Z'){
             ans += (char)tolower(word[i]);
         } else if(word[i] >= 'a' && word[i] <= 'z'){

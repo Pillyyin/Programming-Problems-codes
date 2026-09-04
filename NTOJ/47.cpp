@@ -9,7 +9,7 @@ int main() {
         cin >> Xi[i] ;
     }
 
-    sort(Xi.begin(), Xi.end());  //排序後用二分搜尋
+    sort(Xi.begin(), Xi.end());  
 
     int t;
     cin >> t;
@@ -18,7 +18,7 @@ int main() {
         long long K;
         cin >> K;
 
-        // 二分搜尋
+        // 
         auto it = lower_bound(Xi.begin(), Xi.end(), K);
 
         if(it != Xi.end() && *it == K){

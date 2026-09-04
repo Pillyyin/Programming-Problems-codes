@@ -2,7 +2,7 @@
 using namespace std;
 int main() {
     string drink1, drink2 ;
-    string sweet1, sweet2 ; //有陷阱不超過50所以用string不用int
+    string sweet1, sweet2 ; 
     int count = 0 ;
     cin >> drink1 >> sweet1 ;
     cin >> drink2 >> sweet2 ;

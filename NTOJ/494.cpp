@@ -5,7 +5,7 @@ int main() {
     cin >> n >> k;
     
     while(layer != n){
-        for(int row = 0; row < k; row++){   // ¨C¼h­«½Æ¦L k ¦æ
+        for(int row = 0; row < k; row++){   
             if(layer % 2 == 0){
                 for(int i = 0; i < n; i++){
                     if(i % 2 == 0){
