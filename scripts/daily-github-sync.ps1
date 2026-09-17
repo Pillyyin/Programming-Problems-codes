@@ -44,6 +44,52 @@ function Invoke-Git {
     }
 }
 
+function Normalize-NewLeetCodeFileNames {
+    $leetcodeDirectory = Join-Path $RepositoryPath 'LeetCode'
+    if (-not (Test-Path -LiteralPath $leetcodeDirectory)) {
+        return
+    }
+
+    # Restrict automatic renaming to untracked files.  This guarantees a future
+    # run cannot rename existing LeetCode solutions a second time.
+    foreach ($file in Get-ChildItem -LiteralPath $leetcodeDirectory -Recurse -File -Filter '*.cpp') {
+        $relativePath = $file.FullName.Substring($RepositoryPath.Length + 1).Replace('\', '/')
+        & git ls-files --error-unmatch -- $relativePath *> $null
+        if ($LASTEXITCODE -eq 0) {
+            continue
+        }
+
+        $baseName = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+        if ($baseName -notmatch '^(?<number>\d+)[.\s_-]*(?<title>.+)$') {
+            throw "New LeetCode filename must begin with its numeric question ID: $($file.Name)"
+        }
+
+        $questionNumber = [int]$Matches['number']
+        $title = $Matches['title'] -replace "'", ''
+        # -creplace is case-sensitive: it only separates real CamelCase words.
+        $title = $title -creplace '([A-Z]+)([A-Z][a-z])', '$1-$2'
+        $title = $title -creplace '([a-z0-9])([A-Z])', '$1-$2'
+        $title = $title -replace '[^A-Za-z0-9]+', '-'
+        $title = $title.Trim('-').ToLowerInvariant()
+        if ([string]::IsNullOrWhiteSpace($title)) {
+            throw "New LeetCode filename does not contain a title: $($file.Name)"
+        }
+
+        $newName = '{0:D4}-{1}.cpp' -f $questionNumber, $title
+        if ($file.Name -ceq $newName) {
+            continue
+        }
+
+        $newPath = Join-Path $file.DirectoryName $newName
+        if (Test-Path -LiteralPath $newPath) {
+            throw "Cannot rename '$($file.Name)': '$newName' already exists."
+        }
+
+        Write-SyncLog "RENAMED: $($file.Name) -> $newName"
+        Rename-Item -LiteralPath $file.FullName -NewName $newName
+    }
+}
+
 try {
     if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
         throw 'Git was not found in PATH.'
@@ -61,6 +107,7 @@ try {
 
     Push-Location $RepositoryPath
     Write-SyncLog "Starting daily C++ sync for $today."
+    Normalize-NewLeetCodeFileNames
 
     # By default, preserve files that were deleted locally.  Use -IncludeDeletions
     # only when those removals should also be reflected on GitHub.
