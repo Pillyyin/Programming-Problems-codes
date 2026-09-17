@@ -1,11 +1,16 @@
 [CmdletBinding()]
 param(
-    [string]$RepositoryPath = (Split-Path -Parent $PSScriptRoot),
+    [string]$RepositoryPath,
     [string]$Remote = 'origin',
-    [string]$Branch = 'main'
+    [string]$Branch = 'main',
+    [switch]$IncludeDeletions
 )
 
 $ErrorActionPreference = 'Stop'
+
+if ([string]::IsNullOrWhiteSpace($RepositoryPath)) {
+    $RepositoryPath = Split-Path -Parent $PSScriptRoot
+}
 
 function Write-SyncLog {
     param([string]$Message)
@@ -19,12 +24,23 @@ function Invoke-Git {
     param([Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments)
 
     Write-SyncLog ('COMMAND: git ' + ($Arguments -join ' '))
-    $output = & git @Arguments 2>&1
+    # Git writes normal progress information to stderr.  Temporarily allowing
+    # that stream to continue prevents PowerShell from treating a successful
+    # push as an exception while retaining the exit-code check below.
+    $previousErrorActionPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        $output = & git @Arguments 2>&1
+        $exitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
     foreach ($line in $output) {
         Write-SyncLog "OUTPUT: $line"
     }
-    if ($LASTEXITCODE -ne 0) {
-        throw "git $($Arguments -join ' ') failed with exit code $LASTEXITCODE."
+    if ($exitCode -ne 0) {
+        throw "git $($Arguments -join ' ') failed with exit code $exitCode."
     }
 }
 
@@ -46,8 +62,14 @@ try {
     Push-Location $RepositoryPath
     Write-SyncLog "Starting daily C++ sync for $today."
 
-    # Stage only C++ source files, including additions, edits, renames, and deletions.
-    Invoke-Git add -A -- '*.cpp'
+    # By default, preserve files that were deleted locally.  Use -IncludeDeletions
+    # only when those removals should also be reflected on GitHub.
+    if ($IncludeDeletions) {
+        Invoke-Git add -A -- '*.cpp'
+    }
+    else {
+        Invoke-Git add --ignore-removal -- '*.cpp'
+    }
     & git diff --cached --quiet
     if ($LASTEXITCODE -eq 0) {
         Write-SyncLog 'No changed C++ files to commit; nothing was pushed.'
