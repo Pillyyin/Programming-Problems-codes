@@ -1,0 +1,12 @@
+# Compiled C++ executables and temporary editor files
+*.exe
+*.out
+*.obj
+*.o
+*.pdb
+*.ilk
+*.tmp
+*~
+
+# Daily sync logs are local operational records.
+.github-sync/
