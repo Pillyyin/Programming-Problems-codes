@@ -1,19 +1,16 @@
-//  Transpose a matrix by using one dimension array
-//  Runtime 
-class Solution {
-public:
-    vector<vector<int>> transpose(vector<vector<int>>& matrix) {
-        struct Element{
+#include <bits/stdc++.h>
+using namespace std ;
+
+int main(){
+    struct Element{
             int row ;
             int col ;
             int value ;
         };
 
-        int n, currentb, total ;
+        int n, currentb ;
         vector<Element> a ; //  before transpose
         vector<Element> b ; //  after tanspose
-
-        for(int i=0;i<)
 
         n = a[0].value ;
         b[0].row = a[0].col ;
@@ -36,7 +33,8 @@ public:
             }
         }
 
-        vector<vector<int>> ans ;
-        for()
-    }
-};
+    
+}
+   
+        
+    
