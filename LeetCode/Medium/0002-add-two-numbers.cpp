@@ -11,10 +11,6 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int total1 = 0, total2 = 0 ;
-        for(int i=1;i<l1.size();i++){
-            total += val*pow(10, i) ;
-        }
-
+        
     }
 };
