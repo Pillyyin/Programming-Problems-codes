@@ -1,6 +1,6 @@
 //  2. Connected Islands
 # include <bits/stdc++.h>
-using namespace std;
+using namespace std ;
 
 int m, n ;
 vector<string> region ;
