@@ -1,6 +1,7 @@
 //  1. Library Book Stacking
 # include <bits/stdc++.h>
 using namespace std ;
+
 int main() {
     int count = 0 ;     //  count case
     string books ;

@@ -14,9 +14,9 @@ void dfs(int row, int col){
     if(row < 0 || col < 0 || row >= m || col >= n || region[row][col] == '0'){
         return ;
     }
-    // visited
+    //  visited
     region[row][col] = '0' ; 
-    // cheak around
+    //  cheak around
     for(int i=0;i<8;i++){
         int next_x = row + move_x[i] ;
         int next_y = col + move_y[i] ;
