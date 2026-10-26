@@ -7,12 +7,13 @@ int warehouse[20][20] ;
 int dir_r[4] = {-1, 1, 0, 0} ;
 int dir_c[4] = {0, 0, -1, 1} ;
 
-bool ReachTarget(int tr, int tc, int sr, int sc, int br, int bc){
+//  determine whether a person can reach to the back to push the box
+bool ReachBehind(int tr, int tc, int pr, int pc, int br, int bc){
     bool visited[20][20] = {} ;
     queue<pair<int, int>> q ;
 
-    visited[sr][sc] = true ;
-    q.push({sr, sc}) ;
+    visited[pr][pc] = true ;
+    q.push({pr, pc}) ;
     
     while(!q.empty()){
         int r = q.front().first ;
@@ -44,6 +45,52 @@ struct State{
     int br, bc ;    //  box
     int pr, pc ;    //  person
     int pushes ;
+} ;
+
+//  determine how many times to push to target 
+int Countpushes(State start, int tr, int tc){
+    bool visited[20][20][20][20] = {} ; //  save box and person's position
+    queue<State> q ;
+    
+    start.pushes = 0 ;
+    visited[start.br][start.bc][start.pr][start.pc] = true ;
+    q.push(start) ;
+    
+    while(!q.empty()){
+        State cur = q.front() ;
+        q.pop() ;
+
+        if(cur.br == tr && cur.bc == tc) return cur.pushes ;
+
+        for(int i=0;i<4;i++){
+            int front_r = cur.br + dir_r[i] ;
+            int front_c = cur.bc + dir_c[i] ;
+            int back_r = cur.br - dir_r[i] ;
+            int back_c = cur.bc - dir_c[i] ;
+
+            if(front_r < 0 || front_r >= m || front_c < 0 || front_c >= n) continue ;
+            if(warehouse[front_r][front_c] == 1) continue ;
+            if(back_r < 0 || back_r >= m || back_c < 0 || back_c >= n) continue ;
+            if(warehouse[back_r][back_c] == 1) continue ;
+            if(ReachBehind(back_r, back_c, cur.pr, cur.pc, cur.br,cur.bc) == false) continue ;  // person can't reach
+
+            State next ;
+            next.br = front_r ;
+            next.bc = front_c ;
+            next.pr = cur.br ;
+            next.pc = cur.bc ;
+            next.pushes = cur.pushes + 1 ;
+
+            if(visited[next.br][next.bc][next.pr][next.pc]) continue ;
+            visited[next.br][next.bc][next.pr][next.pc] = true ;
+            q.push(next) ;
+
+        }
+
+    }
+
+    return -1 ;
+    
 }
 
 int main(){
@@ -79,9 +126,14 @@ int main(){
             }
         }
 
-        // ReachTarget(target_r, target_c, start_r, start_c, box_r, box_c) ;
-        cout << ReachTarget(2, 4, start_r, start_c, box_r, box_c) << "\n" ;
-        cout << ReachTarget(3, 1, 2, 2, 2, 1) << "\n" ;
+        State start ;
+        start.br = box_r ;
+        start.bc = box_c ;
+        start.pr = start_r ;
+        start.pc = start_c ;
+
+        cout << Countpushes(start, target_r, target_c) << "\n";
+        
         T-- ;
     }
     
