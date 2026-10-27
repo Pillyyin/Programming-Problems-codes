@@ -1,15 +1,15 @@
+//  Runtume 16ms(80.92%), Memory 19.96MB(61.18%)
 
 //  'S': player, 'B': box, 'T': target, '.': floor, '#': wall
 class Solution {
 public:
 
     int m, n ;
-    char grid[20][20] ;
     int dir_r[4] = {-1, 1, 0, 0} ;
     int dir_c[4] = {0, 0, -1, 1} ;
 
     //  determine whether a person can reach to the back to push the box
-    bool ReachBehind(int tr, int tc, int pr, int pc, int br, int bc){
+    bool ReachBehind(int tr, int tc, int pr, int pc, int br, int bc, vector<vector<char>>& grid){
         bool visited[20][20] = {} ;
         queue<pair<int, int>> q ;
 
@@ -49,7 +49,7 @@ public:
     } ;
 
     //  determine how many times to push to target 
-    int Countpushes(State start, int tr, int tc){
+    int Countpushes(State start, int tr, int tc, vector<vector<char>>& grid){
         bool visited[20][20][20][20] = {} ; //  save box and person's position
         queue<State> q ;
         
@@ -73,7 +73,7 @@ public:
                 if(grid[front_r][front_c] == '#') continue ;
                 if(back_r < 0 || back_r >= m || back_c < 0 || back_c >= n) continue ;
                 if(grid[back_r][back_c] == '#') continue ;
-                if(ReachBehind(back_r, back_c, cur.pr, cur.pc, cur.br,cur.bc) == false) continue ;  // person can't reach
+                if(ReachBehind(back_r, back_c, cur.pr, cur.pc, cur.br,cur.bc, grid) == false) continue ;  // person can't reach
 
                 State next ;
                 next.br = front_r ;
@@ -96,19 +96,25 @@ public:
 
     int minPushBox(vector<vector<char>>& grid) {
         
+        m = grid.size() ;
+        n = grid[0].size() ;
+
         int target_r, target_c, start_r, start_c, box_r, box_c ;
 
-        for(int i=0;i<grid.size();i++){
-            for(int j=0;j<grid[0].size();j++){
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
                 if(grid[i][j] == 'T'){
                     target_r = i ;
                     target_c = j ;
+                    grid[i][j] = '.' ;
                 }else if(grid[i][j] == 'B'){
                     box_r = i ;
                     box_c = j ;
+                    grid[i][j] = '.' ;
                 }else if(grid[i][j] == 'S'){
                     start_r = i ;
                     start_c = j ;
+                    grid[i][j] = '.' ;
                 }
             }
         }
@@ -119,7 +125,7 @@ public:
         start.pr = start_r ;
         start.pc = start_c ;
 
-        return Countpushes(start, target_r, target_c) ;
+        return Countpushes(start, target_r, target_c, grid) ;
         
     }
 };
