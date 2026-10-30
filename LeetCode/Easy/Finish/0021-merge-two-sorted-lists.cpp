@@ -9,18 +9,18 @@
  * };
  */
 
- //Runtime 0ms(100%) | Memory Usage 19.5MB(62.75%)
+ //Runtime 0ms(100%) | Memory 19.5MB(62.75%)
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         ListNode dummy(0) ;
         ListNode* current = &dummy ;
 
-        while (list1 && list2) {
-            if (list1->val < list2->val) {
+        while(list1 && list2) {
+            if(list1->val < list2->val) {
                 current->next = list1 ;
                 list1 = list1->next ;
-            } else {
+            }else{
                 current->next = list2 ;
                 list2 = list2->next ;
             }
