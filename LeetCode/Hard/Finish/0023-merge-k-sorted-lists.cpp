@@ -14,30 +14,30 @@
  
  // Insert a node into the heap
 void pushHeap(ListNode* heap[], int *size, ListNode* x){
-    int i = (*size)++;
-        heap[i] = x;
+    int i = (*size)++ ;
+        heap[i] = x ;
     while(i > 0){
-        int p = (i - 1) / 2;
-        if(heap[p]->val <= heap[i]->val) break;
-        ListNode* tmp = heap[p]; heap[p] = heap[i]; heap[i] = tmp;
-        i = p;
+        int p = (i - 1) / 2 ;
+        if(heap[p]->val <= heap[i]->val) break ;
+        ListNode* tmp = heap[p]; heap[p] = heap[i]; heap[i] = tmp ;
+        i = p ;
     }
 }
 
 // Remove and return the smallest node
 ListNode* popHeap(ListNode* heap[], int *size){
-    ListNode* top = heap[0];
-    heap[0] = heap[--(*size)];
-    int i = 0;
+    ListNode* top = heap[0] ;
+    heap[0] = heap[--(*size)] ;
+    int i = 0 ;
     while(1){
-        int l = 2*i + 1, r = 2*i + 2, min = i;
-        if(l < *size && heap[l]->val < heap[min]->val) min = l;
-        if(r < *size && heap[r]->val < heap[min]->val) min = r;
-        if(min == i) break;
-        ListNode* tmp = heap[i]; heap[i] = heap[min]; heap[min] = tmp;
-        i = min;
+        int l = 2*i + 1, r = 2*i + 2, min = i ;
+        if(l < *size && heap[l]->val < heap[min]->val) min = l ;
+        if(r < *size && heap[r]->val < heap[min]->val) min = r ;
+        if(min == i) break ;
+        ListNode* tmp = heap[i]; heap[i] = heap[min]; heap[min] = tmp ;
+        i = min ;
     }
-    return top;
+    return top ;
 }
 
 class Solution {
