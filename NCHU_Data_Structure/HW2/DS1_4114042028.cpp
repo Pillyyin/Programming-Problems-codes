@@ -29,7 +29,7 @@ char pop_Stack(Stack* st){
 }
 
 void dfs(int push_times, int pop_times, Stack* st, string& record){
-    if(record.size() == source.size() * 2){
+    if(pop_times == (int)source.size()){
         for(int i=0;i<(int)record.size();i++){
             cout << record[i] << " " ;
         }
@@ -41,7 +41,7 @@ void dfs(int push_times, int pop_times, Stack* st, string& record){
         push_Stack(st, source[push_times]) ;
         record.push_back('i') ;
         dfs(push_times + 1, pop_times, st, record) ;
-        pop_Stack(st) ;    //  restore
+        pop_Stack(st) ;     //  restore
         record.pop_back() ; //  restore
     }
 
@@ -66,7 +66,9 @@ int main() {
         st.top =  nullptr ;
         
         cout << '[' << "\n" ;
-        dfs(push_times, pop_times, &st, record) ;
+        if((int)source.size() == (int)target.size()){
+            dfs(push_times, pop_times, &st, record) ;
+        }
         cout << ']' << "\n" ;
         
     }

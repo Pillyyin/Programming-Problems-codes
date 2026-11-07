@@ -1,9 +1,6 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 int main() {
-    char upper = 'A' ;
-    if('A' <= upper <= 'Z'){
-        cout << upper + 32 ;
-    }
+    cout << gcd(1000000, 0) ;
     return 0;
 }
