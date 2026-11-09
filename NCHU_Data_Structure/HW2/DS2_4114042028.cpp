@@ -53,16 +53,19 @@ int main() {
         cin >> m ;
         DBLL.head = nullptr ;
 
-        for(int i=1;i<m+1;i++){  // m equals order 
+        for(int i=1;i<m+1;i++){  // i equals order 
             cin >> n ;
-            insert_DBLL(DBLL, n, m) ;
+            insert_DBLL(&DBLL, n, i) ;
         }
 
         Node* p = DBLL.head ;
-        int memory, count_loop, k = 0 ;
-        while(count_loop != m || head != nullptr){
-            if(gcd(p->num, memory) == 1 || memory == -1){
-                Node* tmp = p->next ;
+        int memory = -1, count_loop = 0, k = 0 ;
+        string pos ;
+        while(count_loop < m+1 && DBLL.head != nullptr){
+            Node* tmp = p->next ;
+            if(memory != -1 && gcd(p->num, memory) == 1){
+                pos += to_string(p->order) ;
+                pos += " " ;
                 delete_DBLL(&DBLL, p) ;
                 k++ ;
                 count_loop = 0 ;    //  recount
@@ -70,10 +73,11 @@ int main() {
                 memory = -1 ;       //  reset memory 
             }else{
                 memory = p->num ;
+                count_loop++ ;
             }
             p = tmp ;
         }
-
+        cout << k << " " << pos << "\n" ;
         T-- ;
     }
 
