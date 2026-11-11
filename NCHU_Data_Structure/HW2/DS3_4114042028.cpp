@@ -20,7 +20,8 @@ int main(){
         cin >> N >> R ;
 
         while(R){
-            stringstream ss 
+            stringstream ss ;
+            
 
         }
     }
