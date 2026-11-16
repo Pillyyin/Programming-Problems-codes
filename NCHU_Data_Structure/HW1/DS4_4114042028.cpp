@@ -94,6 +94,8 @@ int Countpushes(State start, int tr, int tc){
 }
 
 int main(){
+    freopen("testcase4.txt", "r", stdin) ;
+    freopen("output4.txt", "w", stdout) ;
     int T ;
     int target_r, target_c, start_r, start_c, box_r, box_c ;
     cin >> T ;

@@ -26,7 +26,9 @@ void dfs(int row, int col){
 }
 
 int main() {
-    
+    freopen("testcase2.txt", "r", stdin) ;
+    freopen("output2.txt", "w", stdout) ;
+
     while(cin >> m >> n){
         int island = 0 ;
 

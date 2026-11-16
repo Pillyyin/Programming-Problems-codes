@@ -3,10 +3,12 @@
 using namespace std ;
 
 int main() {
+    freopen("testcase3.txt", "r", stdin) ;
+    freopen("output3.txt", "w", stdout) ;
     int k ;
     while(cin >> k){
         string line ;
-        cin.ignore() ;
+        cin >> ws ;     //  skip '\r' / '\n' (CRLF-safe)
         getline(cin, line) ;
 
         stringstream ss(line) ;

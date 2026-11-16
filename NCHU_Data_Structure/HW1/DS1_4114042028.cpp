@@ -3,6 +3,8 @@
 using namespace std ;
 
 int main() {
+    freopen("testcase1.txt", "r", stdin) ;
+    freopen("output1.txt", "w", stdout) ;
     int count = 0 ;     //  count case
     string books ;
     while(cin >> books){
