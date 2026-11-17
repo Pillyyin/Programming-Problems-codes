@@ -31,7 +31,8 @@ char pop_Stack(Stack* st){
 void dfs(int push_times, int pop_times, Stack* st, string& record){
     if(pop_times == (int)source.size()){
         for(int i=0;i<(int)record.size();i++){
-            cout << record[i] << " " ;
+            if(i > 0) cout << " " ;     
+            cout << record[i] ;
         }
         cout << "\n" ;
         return ;
@@ -56,6 +57,8 @@ void dfs(int push_times, int pop_times, Stack* st, string& record){
 }
 
 int main() {
+    freopen("testcase1.txt", "r", stdin);   
+    freopen("output1.txt", "w", stdout); 
     Stack st ;
     string record = "" ;
     while(cin >> source){

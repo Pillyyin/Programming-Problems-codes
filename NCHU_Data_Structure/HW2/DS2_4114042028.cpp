@@ -46,6 +46,8 @@ int delete_DBLL(LinkedList* DBLL, Node* del){
 }
 
 int main() {
+    freopen("testcase2.txt", "r", stdin);   
+    freopen("output2.txt", "w", stdout); 
     int T, m, n ;
     LinkedList DBLL ;
     cin >> T ;
@@ -64,8 +66,8 @@ int main() {
         while(count_loop < m+1 && DBLL.head != nullptr){
             Node* tmp = p->next ;
             if(memory != -1 && gcd(p->num, memory) == 1){
-                pos += to_string(p->order) ;
                 pos += " " ;
+                pos += to_string(p->order) ;
                 delete_DBLL(&DBLL, p) ;
                 k++ ;
                 count_loop = 0 ;    //  recount
@@ -77,7 +79,7 @@ int main() {
             }
             p = tmp ;
         }
-        cout << k << " " << pos << "\n" ;
+        cout << k << pos << "\n" ;
         T-- ;
     }
 
