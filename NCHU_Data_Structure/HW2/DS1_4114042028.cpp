@@ -1,3 +1,4 @@
+//  1. Robot Assembly Sequence
 # include <bits/stdc++.h>
 using namespace std;
 
@@ -56,6 +57,17 @@ void dfs(int push_times, int pop_times, Stack* st, string& record){
     }
 }
 
+//  check source and target
+bool same_letters(const string& a, const string& b){
+    int cnt[26] = {0} ;
+    for(int i=0;i<(int)a.size();i++) cnt[a[i] - 'a']++ ;
+    for(int i=0;i<(int)b.size();i++) cnt[b[i] - 'a']-- ;
+    for(int i=0;i<26;i++){
+        if(cnt[i] != 0) return false ;
+    }
+    return true ;
+}
+
 int main() {
     freopen("testcase1.txt", "r", stdin);   
     freopen("output1.txt", "w", stdout); 
@@ -69,10 +81,14 @@ int main() {
         st.top =  nullptr ;
         
         cout << '[' << "\n" ;
-        if((int)source.size() == (int)target.size()){
+        if((int)source.size() != (int)target.size()){
+            cout << ']' << "\n" ;
+        }else if(!same_letters(source, target)){    //  letters (and their counts) differ => impossible
+            cout << ']' << "\n" ;
+        }else{
             dfs(push_times, pop_times, &st, record) ;
+            cout << ']' << "\n" ;
         }
-        cout << ']' << "\n" ;
         
     }
     

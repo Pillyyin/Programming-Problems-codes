@@ -132,19 +132,63 @@ int actions(int count, Queue* q1, Queue* q2){     //  Eliminate or Stop
     }
 
     Node* w2 = PK_Weakest(q1, q2) ;
-    if(energy > w2->val){
-        enqueue(energy, num, q2) ;
-    }else if(energy == w2->val && num > w2->num){
-        enqueue(energy, num, q2) ;
-    }else{  //  STOP
-        return count ;
+    if(w2 != nullptr){
+        if(energy > w2->val){
+            enqueue(energy, num, q2) ;
+        }else if(energy == w2->val && num > w2->num){
+            enqueue(energy, num, q2) ;
+        }else{  //  Search backwards
+            int pend_val = energy, pend_num = num ;
+            int k = 0 ;
+
+            while(true){
+                k++ ;
+
+                Node* s2 = PK_Strongest(q1, q2) ;
+                int e = s2->val - pend_val ;
+                int e_num = s2->num ;
+
+                if(s2 == q1->front){
+                    dequeue_front(q1) ;
+                }else{
+                    dequeue_front(q2) ;
+                }
+
+                Node* w3 = PK_Weakest(q1, q2) ;
+                if(w3 == nullptr){
+                    break ;
+                }
+
+                if(e > w3->val){
+                    break ;
+                }else if(e == w3->val && e_num > w3->num){
+                    break ;
+                }
+
+                pend_val = e ;
+                pend_num = e_num ;
+
+            }
+
+            if(k % 2 == 0) return count - 1 ;
+            else return count ;
+        }
     }
+    
 
-     count-- ;
+    count-- ;
 
-     actions(count, q1, q2) ;''
+    return actions(count, q1, q2) ;
 }
 
+void clear(Queue* q){
+    while(q->front != nullptr){
+        Node* tmp = q->front ;
+        q->front = q->front->next ;
+        delete(tmp) ;
+    }
+    q->rear = nullptr ;
+}   
 
 int main() {
     freopen("testcase4.txt", "r", stdin) ;
@@ -168,9 +212,12 @@ int main() {
             enqueue(s[i], i, &q1) ;
         }
 
-        actions(n, &q1, &q2) ;
+        int ans = actions(n, &q1, &q2) ;
+        cout << ans << "\n" ;
 
-        delete(q1) ;
-        delete(q2) ;
+        clear(&q1) ;
+        clear(&q2) ;
+
+        
     }
 }
