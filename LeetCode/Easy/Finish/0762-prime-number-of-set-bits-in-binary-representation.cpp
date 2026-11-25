@@ -1,3 +1,4 @@
+//  Runtime 6ms(45.55%), Memory 7.88MB(84.03%)
 class Solution {
 public:
     int countPrimeSetBits(int left, int right) {
@@ -12,19 +13,11 @@ public:
 
 
             //  determine prime
-            bool is_prime = true ;
-            if(setbits == 0 || setbits == 1){
-                is_prime = false ;
-            }else{
-                for(int k=2;k<=sqrt(setbits);k++){
-                    if(setbits % k == 0){
-                        is_prime = false ;
-                        break;
-                    }
-                }
+            if(setbits == 2 || setbits == 3 || setbits == 5 || setbits == 7 || setbits == 11 || setbits == 13 || setbits == 17 || setbits == 19){
+                prime++ ;
             }
 
-            if(is_prime) prime++ ;
+            
         }
 
         return prime ;
