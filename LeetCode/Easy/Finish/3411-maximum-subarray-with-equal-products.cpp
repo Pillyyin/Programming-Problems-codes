@@ -10,11 +10,13 @@ public:
                 g = gcd(g, (long long)nums[j]) ;     
                 l = lcm(l, (long long)nums[j]) ;     
 
+                if(prod > 25200) break ; 
+                
                 if(prod == g * l){
                     LPE = max(LPE, j - i + 1) ;      
                 }
 
-                if(prod > 25200) break ;            
+                           
             }
         }
         return LPE ;
